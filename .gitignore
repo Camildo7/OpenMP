@@ -2,4 +2,5 @@
 *.pdb
 *.obj
 *.out
+*.ilk
 wynik_*/

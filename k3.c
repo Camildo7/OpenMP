@@ -15,12 +15,10 @@ int main() {
     long long limit = (long long)sqrt(n);
     bool* primeArray = (bool*)malloc((limit + 1) * sizeof(bool));
     memset(primeArray, true, (limit + 1) * sizeof(bool));
-    
-    // --- START ZEGAROW ---
+
     double wtime_start = omp_get_wtime();
     clock_t ctime_start = clock();
 
-    // Generowanie dzielnikow bazowych sekwencyjnie.
     for (long long i = 2; i * i * i * i <= n; i++) {
         if (primeArray[i]) {
             for (long long j = i * i; j * j <= n; j += i) { 
@@ -29,7 +27,6 @@ int main() {
         }
     }
 
-    // Sekwencyjne wykreslanie wielokrotnosci bez uwzglednienia blokow danych.
     for (long long i = 2; i <= limit; i++) {
         if (primeArray[i]) {
             long long firstMultiple = (m / i);
@@ -43,7 +40,6 @@ int main() {
         }
     }
 
-    // --- STOP ZEGAROW ---
     clock_t ctime_stop = clock();
     double wtime_stop = omp_get_wtime();
 

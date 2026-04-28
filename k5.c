@@ -15,8 +15,7 @@ int main() {
     long long limit = (long long)sqrt(n);
     bool* primeArray = (bool*)malloc((limit + 1) * sizeof(bool));
     memset(primeArray, true, (limit + 1) * sizeof(bool));
-    
-    // --- START ZEGAROW ---
+
     double wtime_start = omp_get_wtime();
     clock_t ctime_start = clock();
 
@@ -50,7 +49,6 @@ int main() {
         }
     }
 
-    // --- STOP ZEGAROW ---
     clock_t ctime_stop = clock();
     double wtime_stop = omp_get_wtime();
 
