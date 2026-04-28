@@ -1,0 +1,5 @@
+*.exe
+*.pdb
+*.obj
+*.out
+wynik_*/
