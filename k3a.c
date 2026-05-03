@@ -14,7 +14,7 @@ int main() {
     long long limit = (long long)sqrt(n);
     bool* primeArray = (bool*)malloc((limit + 1) * sizeof(bool));
     
-    long long repeats = 50;
+    long long repeats = 120;
     long long blockSize = 131072; 
     long long numberOfBlocks = range / blockSize;
     if (range % blockSize != 0) { numberOfBlocks++; }

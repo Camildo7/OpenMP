@@ -12,11 +12,14 @@ echo.
 echo [2/3] Kompilacja kodow zrodlowych (k1 - k5)...
 icx /Qopenmp /O3 /Zi k1.c /Fek1.exe
 icx /Qopenmp /O3 /Zi k2.c /Fek2.exe
+icx /Qopenmp /O3 /Zi k2_chunk.c /Fek2_chunk.exe
 icx /Qopenmp /O3 /Zi k3.c /Fek3.exe
 icx /Qopenmp /O3 /Zi k3a.c /Fek3a.exe
 icx /Qopenmp /O3 /Zi k4.c /Fek4.exe
 icx /Qopenmp /O3 /Zi k4a.c /Fek4a.exe
 icx /Qopenmp /O3 /Zi k5.c /Fek5.exe
+icx /Qopenmp /O3 /Zi k5b.c /Fek5b.exe
+icx /Qopenmp /O3 /Zi k5c.c /Fek5c.exe
 echo Gotowe.
 echo.
 
@@ -26,29 +29,38 @@ echo.
 
 echo [3/3] Rozpoczecie zbierania danych Microarchitecture Exploration...
 echo Usuwanie starych folderow wynikowych...
-@REM if exist wynik_k1 rmdir /s /q wynik_k1
-@REM if exist wynik_k2 rmdir /s /q wynik_k2
-@REM if exist wynik_k3 rmdir /s /q wynik_k3
-@REM if exist wynik_k3a rmdir /s /q wynik_k3a
+if exist wynik_k1 rmdir /s /q wynik_k1
+if exist wynik_k2 rmdir /s /q wynik_k2
+if exist wynik_k2_chunk rmdir /s /q wynik_k2_chunk
+if exist wynik_k3 rmdir /s /q wynik_k3
+if exist wynik_k3a rmdir /s /q wynik_k3a
 if exist wynik_k4 rmdir /s /q wynik_k4
 if exist wynik_k4a rmdir /s /q wynik_k4a
-@REM if exist wynik_k5 rmdir /s /q wynik_k5
+if exist wynik_k5 rmdir /s /q wynik_k5
+if exist wynik_k5b rmdir /s /q wynik_k5b
+if exist wynik_k5c rmdir /s /q wynik_k5c
 echo.
 
-@REM echo Profilowanie k1...
-@REM vtune -collect uarch-exploration -result-dir wynik_k1 -- k1.exe
-@REM echo Profilowanie k2...
-@REM vtune -collect uarch-exploration -result-dir wynik_k2 -- k2.exe
-@REM echo Profilowanie k3...
-@REM vtune -collect uarch-exploration -result-dir wynik_k3 -- k3.exe
-@REM echo Profilowanie k3a...
-@REM vtune -collect uarch-exploration -result-dir wynik_k3a -- k3a.exe
+echo Profilowanie k1...
+vtune -collect uarch-exploration -result-dir wynik_k1 -- k1.exe
+echo Profilowanie k2...
+vtune -collect uarch-exploration -result-dir wynik_k2 -- k2.exe
+echo Profilowanie k2_chunk...
+vtune -collect uarch-exploration -result-dir wynik_k2_chunk -- k2_chunk.exe
+echo Profilowanie k3...
+vtune -collect uarch-exploration -result-dir wynik_k3 -- k3.exe
+echo Profilowanie k3a...
+vtune -collect uarch-exploration -result-dir wynik_k3a -- k3a.exe
 echo Profilowanie k4...
 vtune -collect uarch-exploration -result-dir wynik_k4 -- k4.exe
 echo Profilowanie k4a...
 vtune -collect uarch-exploration -result-dir wynik_k4a -- k4a.exe
-@REM echo Profilowanie k5...
-@REM vtune -collect uarch-exploration -result-dir wynik_k5 -- k5.exe
+echo Profilowanie k5...
+vtune -collect uarch-exploration -result-dir wynik_k5 -- k5.exe
+echo Profilowanie k5b...
+vtune -collect uarch-exploration -result-dir wynik_k5b -- k5b.exe
+echo Profilowanie k5c...
+vtune -collect uarch-exploration -result-dir wynik_k5c -- k5c.exe
 
 echo.
 echo ====================================================
@@ -57,13 +69,16 @@ echo ====================================================
 
 echo.
 echo [4/4] Generowanie raportow HTML dla uzytkownikow macOS...
-@REM vtune -report summary -r wynik_k1 -format=html -report-output raport_k1.html
-@REM vtune -report summary -r wynik_k2 -format=html -report-output raport_k2.html
-@REM vtune -report summary -r wynik_k3 -format=html -report-output raport_k3.html
-@REM vtune -report summary -r wynik_k3a -format=html -report-output raport_k3a.html
+vtune -report summary -r wynik_k1 -format=html -report-output raport_k1.html
+vtune -report summary -r wynik_k2 -format=html -report-output raport_k2.html
+vtune -report summary -r wynik_k2_chunk -format=html -report-output raport_k2_chunk.html
+vtune -report summary -r wynik_k3 -format=html -report-output raport_k3.html
+vtune -report summary -r wynik_k3a -format=html -report-output raport_k3a.html
 vtune -report summary -r wynik_k4 -format=html -report-output raport_k4.html
 vtune -report summary -r wynik_k4a -format=html -report-output raport_k4a.html
-@REM vtune -report summary -r wynik_k5 -format=html -report-output raport_k5.html
+vtune -report summary -r wynik_k5 -format=html -report-output raport_k5.html
+vtune -report summary -r wynik_k5b -format=html -report-output raport_k5b.html
+vtune -report summary -r wynik_k5c -format=html -report-output raport_k5c.html
 
 echo.
 echo Raporty HTML zostaly wygenerowane w glownym folderze!

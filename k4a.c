@@ -14,7 +14,7 @@ int main() {
     long long limit = (long long)sqrt(n);
     bool* primeArray = (bool*)malloc((limit + 1) * sizeof(bool));
     
-    long long repeats = 20;
+    long long repeats = 50;
 
     double wtime_start = omp_get_wtime();
     clock_t ctime_start = clock();

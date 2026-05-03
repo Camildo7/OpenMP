@@ -6,6 +6,12 @@
 #include <time.h>
 #include <omp.h>
 
+// Definiujemy rozmiar paczki, mozna podac z argumentu w linii komend
+// np. przy kompilacji: icx -DCHUNK_SIZE=50 -O3 -qopenmp k2_chunk.c 
+#ifndef CHUNK_SIZE
+#define CHUNK_SIZE 50
+#endif
+
 int main() {
     long long m = 2, n = 100000000;
     long long range = n - m + 1;
@@ -14,7 +20,7 @@ int main() {
     long long limit = (long long)sqrt(n);
     bool* primeArray = (bool*)malloc((limit + 1) * sizeof(bool));
     
-    long long repeats = 50;
+    long long repeats = 6;
 
     double wtime_start = omp_get_wtime();
     clock_t ctime_start = clock();
@@ -23,24 +29,16 @@ int main() {
         memset(result, true, range * sizeof(bool));
         memset(primeArray, true, (limit + 1) * sizeof(bool));
 
-        for (long long i = 2; i * i * i * i <= n; i++) {
-            if (primeArray[i]) {
-                for (long long j = i * i; j * j <= n; j += i) { 
-                    primeArray[j] = false; 
-                }
+        for (long long i = 2; i * i <= n; i++) {
+            for (long long j = 2; j * j <= i; j++) {
+                if (primeArray[j] && i % j == 0) { primeArray[i] = false; break; }
             }
         }
-
-        for (long long i = 2; i <= limit; i++) {
-            if (primeArray[i]) {
-                long long firstMultiple = (m / i);
-                if (firstMultiple <= 1) { firstMultiple = i + i; }
-                else if (m % i) { firstMultiple = (firstMultiple * i) + i; }
-                else { firstMultiple = (firstMultiple * i); }
-                
-                for (long long j = firstMultiple; j <= n; j += i) { 
-                    result[j - m] = false; 
-                }
+        
+        #pragma omp parallel for schedule(dynamic, CHUNK_SIZE)
+        for (long long i = m; i <= n; i++) {
+            for (long long j = 2; j * j <= i; j++) {
+                if (primeArray[j] && i % j == 0) { result[i - m] = false; break; }
             }
         }
     }
@@ -54,11 +52,10 @@ int main() {
     long long primeCount = 0;
     for (long long i = m; i <= n; i++) { if (result[i - m]) primeCount++; }
 
-    printf("[k3] Znaleziono: %lld\n", primeCount);
+    printf("[k2_chunk - Size: %d] Znaleziono: %lld\n", CHUNK_SIZE, primeCount);
     printf("Sredni czas procesorow: %f sekund\n", avg_ctime);
     printf("Sredni czas wallclock : %f sekund\n\n", avg_wtime);
-    
-    free(result); 
-    free(primeArray);
+
+    free(result); free(primeArray);
     return 0;
 }
