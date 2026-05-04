@@ -11,7 +11,9 @@
 #define GET_BIT(array, index)   ((array[(index) >> 3] & (1 << ((index) & 7))) != 0)
 
 int main() {
-    long long m = 2, n = 100000000;
+    // long long m = 2, n = 100000000;
+    // long long m = 2, n = 50000000;
+    long long m = 50000000, n = 100000000;
     long long range = n - m + 1;
     
     long long byteSize = (range + 7) / 8;

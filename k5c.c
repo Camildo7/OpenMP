@@ -7,8 +7,22 @@
 #include <omp.h>
 
 int main() {
-    long long m = 3, n = 100000000;
+
     
+    // Wariant 1: Pełny zakres <2; 100000000>
+    // long long m_real = 2, n = 100000000;
+    
+    // Wariant 2: Dolna połowa zakresu <2; 50000000>
+    // long long m_real = 2, n = 50000000;
+    
+    // Wariant 3: Górna połowa zakresu (od 50M do 100M)
+    long long m_real = 50000001, n = 100000000;
+
+
+    long long m = (m_real % 2 == 0) ? m_real + 1 : m_real;
+    
+    long long primeCount = (m_real <= 2 && n >= 2) ? 1 : 0;
+
     long long rangeOdds = (n - m) / 2 + 1;
     bool* result = (bool*)malloc(rangeOdds * sizeof(bool));
     
@@ -67,15 +81,16 @@ int main() {
     double avg_ctime = ((double)(ctime_stop - ctime_start) / CLOCKS_PER_SEC) / repeats;
     double avg_wtime = (wtime_stop - wtime_start) / repeats;
 
-    long long primeCount = 1;
     for (long long i = 0; i < rangeOdds; i++) { 
         if (result[i]) primeCount++; 
     }
 
-    printf("[k5c - OddsOnly] Znaleziono: %lld\n", primeCount);
+    printf("[k5c - OddsOnly] Zakres: <%lld; %lld>\n", m_real, n);
+    printf("Znaleziono: %lld\n", primeCount);
     printf("Sredni czas procesorow: %f sekund\n", avg_ctime);
     printf("Sredni czas wallclock : %f sekund\n\n", avg_wtime);
 
-    free(result); free(primeArray);
+    free(result); 
+    free(primeArray);
     return 0;
 }

@@ -7,7 +7,9 @@
 #include <omp.h>
 
 int main() {
-    long long m = 2, n = 100000000;
+    // long long m = 2, n = 100000000;
+    // long long m = 2, n = 50000000;
+    long long m = 50000000, n = 100000000;
     long long range = n - m + 1;
     bool* result = (bool*)malloc(range * sizeof(bool));
     memset(result, true, range * sizeof(bool));
