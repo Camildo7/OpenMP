@@ -18,7 +18,7 @@ int main() {
     
     long long repeats = 350;
     long long blockSize = 32768; 
-    long long numberOfBlocks = (n - m) / blockSize;
+    long long numberOfBlocks = (range + blockSize - 1) / blockSize;
     if ((n - m) % blockSize != 0) { numberOfBlocks++; }
 
     double wtime_start = omp_get_wtime();

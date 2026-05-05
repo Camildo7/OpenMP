@@ -69,16 +69,16 @@ echo ====================================================
 
 echo.
 echo [4/4] Generowanie raportow HTML dla uzytkownikow macOS...
-vtune -report summary -r wynik_k1 -format=html -report-output raport_k1_3.html
-vtune -report summary -r wynik_k2 -format=html -report-output raport_k2_3.html
-vtune -report summary -r wynik_k2_chunk -format=html -report-output raport_k2_chunk_3.html
-vtune -report summary -r wynik_k3 -format=html -report-output raport_k3_3.html
-vtune -report summary -r wynik_k3a -format=html -report-output raport_k3a_3.html
-vtune -report summary -r wynik_k4 -format=html -report-output raport_k4_3.html
-vtune -report summary -r wynik_k4a -format=html -report-output raport_k4a_3.html
-vtune -report summary -r wynik_k5 -format=html -report-output raport_k5_3.html
-vtune -report summary -r wynik_k5b -format=html -report-output raport_k5b_3.html
-vtune -report summary -r wynik_k5c -format=html -report-output raport_k5c_3.html
+vtune -report summary -r wynik_k1 -format=html -report-output raport_k1_4.html
+vtune -report summary -r wynik_k2 -format=html -report-output raport_k2_4.html
+vtune -report summary -r wynik_k2_chunk -format=html -report-output raport_k2_chunk_4.html
+vtune -report summary -r wynik_k3 -format=html -report-output raport_k3_4.html
+vtune -report summary -r wynik_k3a -format=html -report-output raport_k3a_4.html
+vtune -report summary -r wynik_k4 -format=html -report-output raport_k4_4.html
+vtune -report summary -r wynik_k4a -format=html -report-output raport_k4a_4.html
+vtune -report summary -r wynik_k5 -format=html -report-output raport_k5_4.html
+vtune -report summary -r wynik_k5b -format=html -report-output raport_k5b_4.html
+vtune -report summary -r wynik_k5c -format=html -report-output raport_k5c_4.html
 
 echo.
 echo Raporty HTML zostaly wygenerowane w glownym folderze!

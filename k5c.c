@@ -10,13 +10,13 @@ int main() {
 
     
     // Wariant 1: Pełny zakres <2; 100000000>
-    // long long m_real = 2, n = 100000000;
+    long long m_real = 2, n = 100000000;
     
     // Wariant 2: Dolna połowa zakresu <2; 50000000>
     // long long m_real = 2, n = 50000000;
     
     // Wariant 3: Górna połowa zakresu (od 50M do 100M)
-    long long m_real = 50000001, n = 100000000;
+    // long long m_real = 50000001, n = 100000000;
 
 
     long long m = (m_real % 2 == 0) ? m_real + 1 : m_real;
