@@ -25,7 +25,6 @@ int main() {
     long long repeats = 1000;
     long long blockSize = 131072; 
     long long numberOfBlocks = (range + blockSize - 1) / blockSize;
-    if ((n - m) % blockSize != 0) { numberOfBlocks++; }
 
     double wtime_start = omp_get_wtime();
     clock_t ctime_start = clock();
