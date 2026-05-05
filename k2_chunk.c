@@ -6,8 +6,6 @@
 #include <time.h>
 #include <omp.h>
 
-// Definiujemy rozmiar paczki, mozna podac z argumentu w linii komend
-// np. przy kompilacji: icx -DCHUNK_SIZE=50 -O3 -qopenmp k2_chunk.c 
 #ifndef CHUNK_SIZE
 #define CHUNK_SIZE 50
 #endif
